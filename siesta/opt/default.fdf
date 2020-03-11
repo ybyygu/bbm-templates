@@ -22,7 +22,7 @@ DM.KickMixingWeight     0.02        # Default value: 0.50
 # NOTE: the final . is important
 3 0 0 0.
 0 3 0 0.
-0 0 3 0.
+0 0 1 0.
 %endblock kgridMonkhorstPack
 
 # Eigenvalue problem: order-N or diagonalization
