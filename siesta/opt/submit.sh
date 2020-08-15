@@ -6,11 +6,11 @@ source "$parent_dir/env.rc"
 
 # 1. prepare SIESTA input files
 # require gosh >= 0.0.25
-ln -s "$parent_dir"/psml/* .
-ln -s "$BBM_TPL_DIR"/default.fdf .
+ln -s "$parent_dir"/psml/* . 2>/dev/null
+ln -s "$BBM_TPL_DIR"/default.fdf . 2>/dev/null
 
 # 2. read fdf stream from stdin
-mpirun siesta > siesta.log
+mpirun siesta > siesta.log 2>/dev/null
 
 # 3. save important files to bbm job starting dir
 # require gosh >= 0.0.25
