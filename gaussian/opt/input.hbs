@@ -1,0 +1,11 @@
+%nproc=4
+%mem=2GB
+#p opt B3LYP/6-31G(d,p) nosym fchk=all test
+
+optimizae geometry
+
+0 1
+{{#each molecule.atoms as |a| ~}}
+{{format a.symbol width=3}} {{format a.x}} {{format a.y}} {{format a.z}}
+{{/each}}
+
