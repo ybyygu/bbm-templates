@@ -1,0 +1,9 @@
+opti conp lbfgs nosym # delete-marker
+name test
+# put coordinates here
+cartesian
+{{#each molecule.atoms as |a| ~}}
+{{format a.symbol width=3}} core {{format a.x}} {{format a.y}} {{format a.z}}
+{{/each~}}
+# assign force filed in library
+library reaxff

@@ -1,0 +1,14 @@
+# put keywords here
+opti conp lbfgs nosym
+title
+{{molecule.title}}
+end
+# put coordinates here
+cartesian
+{{#each molecule.atoms as |a| ~}}
+{{format a.symbol width=3}} core {{format a.x}} {{format a.y}} {{format a.z}}
+{{/each~}}
+# assign force filed in library
+library reaxff
+# output options
+output xyz final.xyz
