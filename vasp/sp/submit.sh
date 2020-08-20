@@ -19,11 +19,13 @@ cp "$BBM_JOB_DIR/CHGCAR" . 2>/dev/null
 
 # PLEASE CHANGE
 # submit vasp, ignoring stdout produced from vasp exe.
-mpirun /share/apps/vasp/bin/vasp >/dev/null
+run-vasp.sh > "$BBM_JOB_DIR"/vasp.log
 
-# save CHGCAR and WAVECAR files for next step
-cp CHGCAR WAVECAR "$BBM_JOB_DIR/" 2>/dev/null
+# save CHGCAR and WAVECAR for resuming calculation later
+cp CHGCAR WAVECAR OUTCAR "$BBM_JOB_DIR/" 2>/dev/null
+# save intermediate structures
+cp OUTCAR CONTCAR "$BBM_JOB_DIR/" 2>/dev/null
 
-# PLEASE CHANGE
+
 # extract energy and forces from OUTCAR to stdout
 gosh-adaptor vasp OUTCAR
