@@ -2,14 +2,14 @@
 #PAO.BasisType           split       # split or splitgauss
 #PAO.BasisSize           DZP         # basis set
 PAO.SplitTailNorm       .true.      # Required for psml as noted in release note (default: false)
-XC.functional           GGA         # Exchange-correlation functional type
-XC.authors              PBE         # Particular parametrization of xc func
+#XC.functional           GGA         # Exchange-correlation functional type
+#XC.authors              PBE         # Particular parametrization of xc func
 SpinPolarized           .false.     # Spin unpolarized calculation
 
 # DFT, Grid
 MeshCutoff              300. Ry     # Equivalent planewave cutoff for the grid
 MaxSCFIterations        200         # Maximum allowed number of SCF iterations per electroinic step
-SCFMustConverge         .true.      # continue to opt if fail to converge; Default value: .false.
+SCFMustConverge         .false.      # continue to opt if fail to converge; Default value: .false.
 
 # Kpoints
 #
@@ -18,15 +18,19 @@ SCFMustConverge         .true.      # continue to opt if fail to converge; Defau
 #KgridCutoff             0.0 bohr
 %block kgridMonkhorstPack
 # NOTE: the final . is important
-3 0 0 0.
-0 3 0 0.
+2 0 0 0.
+0 2 0 0.
 0 0 1 0.
 %endblock kgridMonkhorstPack
 
-
-# Eigenvalue problem: order-N or diagonalization
-SolutionMethod          diagon      # diagon is more robust; orderN is efficient for larger system
-ElectronicTemperature   5 K         # Temp. for Fermi smearing, default is 300 K
+ElectronicTemperature   500 K       # Temp. for Fermi smearing, default is 300 K
+#SolutionMethod          diagon      # diagon is more robust; ELSI is more efficient for larger system
+# Parallelization over k-points the ELSI interface with the ELPA solver, only works for SIESTA compiled with ELSI enabled.
+# For performance gains, see Fig 7 in doi: 10.1063/5.0005077
+Solution.Method         ELSI
+ELSI.Solver             ELPA
+ELSI.ELPA.NSinglePrecision 200      # enable single precision mode, which could substantially save in CPU time
+DM.Normalization.Tolerance 0.001    # (To avoid too stringent an intermediate check)
 
 # SCF loop
 #
