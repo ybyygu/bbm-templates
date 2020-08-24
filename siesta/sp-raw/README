@@ -1,0 +1,6 @@
+用于低精度计算
+
+- 可降低K点数目, 如果晶胞较大, 可直接用Gamma点计算, 速度提升明显
+- ElectronicTemperature   5000 K (提高smearing温度, 更容易收敛)
+- NeglNonOverlapInt yes (忽略一些作用项, 可适当加速)
+- Harris.Functional yes (非常快, 但也非常粗糙, 仅适用于LDA, 注意修改submit.sh, 替换为LDA版psml)
