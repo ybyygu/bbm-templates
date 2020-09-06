@@ -1,0 +1,27 @@
+#+TITLE: BlackBox Model (BBM) templates
+#+SETUPFILE: ~/Notes/common.org
+#+SETUPFILE: ~/Notes/coding.org
+#+OPTIONS: toc:nil
+
+* 如何测试BBM模板是否正确?
+可以使用gosh命令.
+
+: gosh> load POSCAR
+: gosh> format /share/apps/siesta/sp/input.tera
+
+* 如何使用BBM来优化结构?
+** 修改BBM模板中计算参数, 使用VASP/SIESTA等直接优化
+: bbm -t /share/apps/siesta/opt -v -o siesta-opt.cif
+
+** 使用bbm命令内置的优化算法(Dammped LBFGS)
+: bbm -t /share/apps/siesta/sp --opt --fmax=0.05 --nmax=500 -o final.poscar
+
+* 如何编写新的BBM计算模板?
+** input.hbs
+该文件使用handlebars模板语言, 语法参考: [[https://handlebarsjs.com/guide/][Introduction | Handlebars]]
+
+** input.tera
+该文件使用tera模板语言, 语法参考: [[https://tera.netlify.app/docs/][Tera]]
+
+目前, 默认使用input.hbs做为计算输入流的的渲染模板. 如果需要切换为input.tera, 注
+意修改.env文件, 添加"BBM_TPL_FILE=input.tera"行.
