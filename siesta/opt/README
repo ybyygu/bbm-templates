@@ -1,0 +1,10 @@
+input.tera使用tera模板语法, 和默认的input.hbs不同. 因此, 需要修改.env文件(BBM_TPL_FILE).
+
+tera语法参考: https://tera.netlify.app/docs/#getting-started
+
+注意: 这里仅将VASP POSCAR中的"F F F", 翻译为 SIESTA atom constrains, 如果仅固定
+原子的某个xyz分量, 请修改input.tera文件.
+
+: {%- if a.freezing.0 and a.freezing.1 and a.freezing.2 %} position {{ a.index }}
+
+a.freezing为一个[bool, bool, bool]三元数组, 对应VASP中的selective dynamics flags.

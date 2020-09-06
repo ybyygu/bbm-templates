@@ -1,0 +1,31 @@
+SystemLabel               siesta
+NumberOfAtoms             {{molecule.number_of_atoms}}
+NumberOfSpecies           {{molecule.number_of_species}}
+%block ChemicalSpeciesLabel
+{% for s in molecule.species -%}
+{{s.index}} {{s.element_number}} {{s.element_symbol}} {{s.number_of_atoms}}
+{% endfor %}
+%endblock ChemicalSpeciesLabel
+AtomicCoordinatesFormat   NotScaledCartesianAng
+%block AtomicCoordinatesAndAtomicSpecies
+{%for a in molecule.atoms -%}
+{{a.x|format}} {{a.y|format}} {{a.z|format}} {{a.element_index}}
+{% endfor -%}
+%endblock AtomicCoordinatesAndAtomicSpecies
+LatticeConstant            1.0 ang
+%block LatticeVectors
+{% for v in molecule.unit_cell.va %} {{ v | format}} {% endfor %}
+{% for v in molecule.unit_cell.vb %} {{ v | format}} {% endfor %}
+{% for v in molecule.unit_cell.vc %} {{ v | format}} {% endfor %}
+%endblock LatticeVectors
+
+# reading more FDF information from default.fdf
+%include default.fdf
+
+# optimize geometry with freezing atoms
+%block GeometryConstraints
+{% for a in molecule.atoms %}
+{%- if a.freezing.0 and a.freezing.1 and a.freezing.2 %} position {{ a.index }}
+{% endif -%}
+{% endfor -%}
+%endblock GeometryConstraints
