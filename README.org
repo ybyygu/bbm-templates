@@ -3,12 +3,6 @@
 #+SETUPFILE: ~/Notes/coding.org
 #+OPTIONS: toc:nil
 
-* 如何测试BBM模板是否正确?
-可以使用gosh命令.
-
-: gosh> load POSCAR
-: gosh> format /share/apps/siesta/sp/input.tera
-
 * 如何使用BBM来优化结构?
 ** 修改BBM模板中计算参数, 使用VASP/SIESTA等直接优化
 : bbm -t /share/apps/siesta/opt -v -o siesta-opt.cif
@@ -17,6 +11,12 @@
 : bbm -t /share/apps/siesta/sp --opt --fmax=0.05 --nmax=500 -o final.poscar
 
 * 如何编写新的BBM计算模板?
+** .env
+该文件用于修改BBM模板的默认参数.
+- BBM_SCR_DIR: 在Linux系统, 默认为/tmp
+- BBM_TPL_FILE: 默认为input.hbs
+- BBM_RUN_FILE: 任务提交脚本, 默认为submit.sh
+ 
 ** input.hbs
 该文件使用handlebars模板语言, 语法参考: [[https://handlebarsjs.com/guide/][Introduction | Handlebars]]
 
@@ -25,3 +25,23 @@
 
 目前, 默认使用input.hbs做为计算输入流的的渲染模板. 如果需要切换为input.tera, 注
 意修改.env文件, 添加"BBM_TPL_FILE=input.tera"行.
+
+** submit.sh
+这是默认的计算提交脚本. 其中可使用的变量为:
+- BBM_TPL_DIR: 模板目录全路径
+- BBM_JOB_DIR: 任务所在的当前目录全路径
+- BBM_SCR_DIR: 计算任务公用的临时目录全路径.
+
+其它事项:
+- submit.sh 标准输入(stdin)为用input.tera(或input.hbs)模板格式化生成的输入流.
+- submit.sh 脚本中的当前路径(pwd)为自动生成的$BBM_SCR_DIR/.tmp开头的临时目录.
+- submit.sh 正常结束后.tmp*临时目录会被自动清除.
+
+* 如何测试BBM模板是否正确?
+可以使用gosh命令.
+
+: gosh> load POSCAR
+: gosh> format /share/apps/siesta/sp/input.tera
+* 注意事项
+- 由于VASP POSCAR格式限制(原子必须按元素成组排列), 使用VASP计算时, 原子排序可能
+  会发现变化.
