@@ -11,24 +11,24 @@ cat > POSCAR
 ## Prepare other input files
 # copy important files into the .tmp* scratch directory, which will be
 # automatically removed if job finished successful.
-cp "$BBM_JOB_DIR/INCAR" .
-cp "$BBM_JOB_DIR/POTCAR" .
-cp "$BBM_JOB_DIR/KPOINTS" .
+cp "$BBM_TPL_DIR/INCAR" .
+cp "$BBM_TPL_DIR/POTCAR" .
+cp "$BBM_TPL_DIR/KPOINTS" .
 
 # Try resume VASP calculation from last step.
-cp "$BBM_JOB_DIR/WAVECAR" . 2>/dev/null
-cp "$BBM_JOB_DIR/CHGCAR" . 2>/dev/null
+cp "$BBM_TPL_DIR/WAVECAR" . 2>/dev/null
+cp "$BBM_TPL_DIR/CHGCAR" . 2>/dev/null
 
 ## 2. How to run vasp
 # PLEASE CHANGE
 # submit vasp, ignoring stdout produced from vasp exe.
-run-vasp.sh > "$BBM_JOB_DIR"/vasp.log
+run-vasp.sh > "$BBM_TPL_DIR"/vasp.log
 
 ## 3. Post-processes
 # save CHGCAR and WAVECAR for resuming calculation later
-cp CHGCAR WAVECAR OUTCAR "$BBM_JOB_DIR/" 2>/dev/null
+cp CHGCAR WAVECAR OUTCAR "$BBM_TPL_DIR/" 2>/dev/null
 # save intermediate structures
-cp OUTCAR CONTCAR "$BBM_JOB_DIR/" 2>/dev/null
+cp OUTCAR CONTCAR "$BBM_TPL_DIR/" 2>/dev/null
 
 ## 4. extract energy and forces from OUTCAR to stdout
 gosh-adaptor vasp OUTCAR

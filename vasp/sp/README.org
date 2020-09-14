@@ -1,0 +1,15 @@
+* 如何使用?
+- 复制本目录到任务所在目录
+  : cp -r /share/apps/vasp/sp .
+
+- 在sp目录中准备VASP输入文件: INCAR, KPOINTS, POTCAR (POSCAR在计算中根据
+  input.tera模板, 自动生成)
+* 注意事项
+- INCAR中应为单点计算
+  : NSW    =    0
+  : IBRION =   -1
+- 需要打开WAVECAR等相关设置, 方便多步计算中续算
+  : ISTART = 1
+  : ICHARG = 1
+  : LCHARG = .T.
+  : LWAVE = .T.
