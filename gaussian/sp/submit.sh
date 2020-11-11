@@ -1,6 +1,8 @@
 #! /usr/bin/env bash
+source /share/apps/gaussian/g09.rc
+
 # change gaussian scratch directory to a safer location
-export GAUSS_SCRDIR=$(pwd)
+#export GAUSS_SCRDIR=$(pwd)
 
 # remove old checkpoint file
 rm Test.FChk 2>/dev/null
@@ -16,6 +18,7 @@ if [[ ! `grep 'Normal termination' gauss.log` ]]; then
     >&2 echo "Please check g09 output for tails: /tmp/gauss.log"
     exit 12
 fi
+cp gauss.log /tmp/
 
 # call adaptor to extract results
-gaussian-adaptor Test.FChk
+gosh-adaptor gaussian Test.FChk

@@ -15,7 +15,7 @@ ln -s "$BBM_TPL_DIR"/default.fdf . 2>/dev/null
 cp "$BBM_JOB_DIR/siesta.DM" . 2>/dev/null
 
 # 2. read fdf stream from stdin, write stdout to siesta.log for parsing
-tee input.fdf | mpirun -np 12 2>&1 | tee siesta.log > "$BBM_JOB_DIR"/siesta.log
+tee input.fdf | mpirun -np 12 siesta 2>&1 | tee siesta.log > "$BBM_JOB_DIR"/siesta.log
 
 # 3. save important files to bbm job starting dir
 # require gosh >= 0.0.25

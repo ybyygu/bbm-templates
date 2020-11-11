@@ -5,10 +5,10 @@
 
 * 如何使用BBM来优化结构?
 ** 修改BBM模板中计算参数, 使用VASP/SIESTA等直接优化
-: bbm -t /share/apps/siesta/opt -v -o siesta-opt.cif
+: bbm input.cif -t /share/apps/siesta/opt -v -o siesta-opt.cif
 
 ** 使用bbm命令内置的优化算法(Dammped LBFGS)
-: bbm -t /share/apps/siesta/sp --opt --fmax=0.05 --nmax=500 -o final.poscar
+: bbm POSCAR -t /share/apps/siesta/sp --opt --fmax=0.05 --nmax=500 -o final.poscar
 
 * 如何编写新的BBM计算模板?
 ** .env

@@ -24,12 +24,12 @@ SCFMustConverge         .false.      # continue to opt if fail to converge; Defa
 %endblock kgridMonkhorstPack
 
 ElectronicTemperature   500 K       # Temp. for Fermi smearing, default is 300 K
-#SolutionMethod          diagon      # diagon is more robust; ELSI is more efficient for larger system
+SolutionMethod          diagon      # diagon is more robust; ELSI is more efficient for larger system
 # Parallelization over k-points the ELSI interface with the ELPA solver, only works for SIESTA compiled with ELSI enabled.
 # For performance gains, see Fig 7 in doi: 10.1063/5.0005077
-Solution.Method         ELSI
-ELSI.Solver             ELPA
-ELSI.ELPA.NSinglePrecision 200      # enable single precision mode, which could substantially save in CPU time
+#Solution.Method         ELSI
+#ELSI.Solver             ELPA
+#ELSI.ELPA.NSinglePrecision 200      # enable single precision mode, which could substantially save in CPU time
 DM.Normalization.Tolerance 0.001    # (To avoid too stringent an intermediate check)
 
 # SCF loop

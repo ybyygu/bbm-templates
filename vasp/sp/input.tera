@@ -10,5 +10,5 @@ Direct
 {% for a in molecule.atoms -%}
 {{ a.fx | format}} {{ a.fy | format}} {{ a.fz | format}}
 {%- for tf in a.freezing %} {{ tf | format | replace(from="true", to="F") | replace(from="false", to="T") -}}
-{%- endfor %} # {{a.symbol}} {{a.index}}
+{%- endfor %} # {{a.symbol}}{{a.index}}
 {% endfor %}
