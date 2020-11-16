@@ -1,0 +1,18 @@
+# 
+# This is the geometry file that corresponds to the current relaxation step.
+# If you do not want this file to be written, set the "write_restart_geometry" flag to .false.
+#  aims_uuid : 1B0706FE-87C9-4D0D-ACEC-0E4F7497BEFE                                
+# 
+lattice_vector      5.64000000      0.00000000      0.00000000
+lattice_vector      2.82000000      2.82000000      0.00000000
+lattice_vector      0.00000000      0.00000000     32.82000000
+atom       0.00000000      0.00000000     15.00000000 Na
+  constrain_relaxation .true.
+atom       0.00000000      0.00000000     17.82000000 Cl
+  constrain_relaxation .true.
+atom       2.82000000     -0.00000000     17.82000000 Na
+  constrain_relaxation .true.
+atom       2.82000000     -0.00000000     15.00000000 Cl
+  constrain_relaxation .true.
+atom       3.77759670     -0.95784041     21.39041004 O
+atom       3.33865865     -0.51878540     20.45546873 C

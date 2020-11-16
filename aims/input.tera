@@ -1,0 +1,7 @@
+lattice_vector {% for v in molecule.unit_cell.va %} {{ v | format}} {% endfor %}
+lattice_vector {% for v in molecule.unit_cell.vb %} {{ v | format}} {% endfor %}
+lattice_vector {% for v in molecule.unit_cell.vc %} {{ v | format}} {% endfor %}
+{% for a in molecule.atoms -%}
+atom {{ a.fx | format}} {{ a.fy | format}} {{ a.fz | format}} {{a.symbol}} {% if a.freezing[0] and a.freezing[1] and a.freezing[2] %}
+  constrain_relaxation .true.  {%- endif %}
+{% endfor %}
