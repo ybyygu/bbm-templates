@@ -42,6 +42,11 @@
 
 : gosh> load POSCAR
 : gosh> format /share/apps/siesta/sp/input.tera
+
+Slab模型中沿z轴方向选择性固定原子:
+: gosh> load test.cif
+: gosh> format /share/apps/vasp/templates/slab-fix-atoms-by-zcoords.tera
+
 * 注意事项
 - 由于VASP POSCAR格式限制(原子必须按元素成组排列), 使用VASP计算时, 原子排序可能
   会发现变化.

@@ -1,0 +1,13 @@
+tera template for vasp slab model # syntax ref: https://tera.netlify.app/docs
+1.0
+{% for v in molecule.unit_cell.va %} {{ v | format}} {% endfor %}
+{% for v in molecule.unit_cell.vb %} {{ v | format}} {% endfor %}
+{% for v in molecule.unit_cell.vc %} {{ v | format}} {% endfor %}
+{% for e in molecule.element_types %} {{ e.0 }} {% endfor %}
+{% for e in molecule.element_types %} {{ e.1 }} {% endfor %}
+Selective dynamics
+Direct
+{% for a in molecule.atoms -%}
+{{ a.fx | format}} {{ a.fy | format}} {{ a.fz | format}}
+{%- if a.fz > 0.1 %} T T T {%- else %} F F F {% endif %}
+{% endfor %}
