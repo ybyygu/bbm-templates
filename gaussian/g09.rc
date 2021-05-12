@@ -1,0 +1,8 @@
+script_path=$(realpath "${BASH_SOURCE[0]:-$0}")
+echo $script_path
+script_root=$(dirname "$script_path")
+
+export g09root="$script_root/bin"
+export GAUSS_SCRDIR=/scratch/gaussian
+
+source $g09root/g09/bsd/g09.profile
