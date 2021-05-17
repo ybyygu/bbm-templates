@@ -1,0 +1,5 @@
+script_path=$(realpath "${BASH_SOURCE[0]:-$0}")
+echo $script_path
+script_root=$(dirname "$script_path")
+
+export g03root=$(realpath "$script_root/../data/g03.E01")
