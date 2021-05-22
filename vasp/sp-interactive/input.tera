@@ -1,4 +1,4 @@
-tera template # syntax ref: https://tera.netlify.app/docs
+tera template # syntax ref: https://tera.netlify.app/docs                                                                                                                                                                                     
 1.0
 {% for v in molecule.unit_cell.va %} {{ v | format}} {% endfor %}
 {% for v in molecule.unit_cell.vb %} {{ v | format}} {% endfor %}

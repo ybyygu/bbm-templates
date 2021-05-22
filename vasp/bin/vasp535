@@ -1,0 +1,26 @@
+#! /bin/bash
+
+# 锁定每进程的线程数为1
+export OMP_NUM_THREADS=1
+
+# 提升收敛速度
+export I_MPI_ADJUST_REDUCE=3
+
+# new Intel Gold 6240
+# Knode1 => Knode54
+
+# old Intel Xeon v4
+# Knode55 => Knode100
+#node=$(hostname)
+#number=${node:5}
+#if ((number >= 55 && number <= 100)); then
+#    echo "run in old node"
+#    module load old/intel18u4
+#    mpirun -bootstrap lsf -PSM2 /export/soft_old/vasp544/vasp.5.4.4/bin/vasp_std
+#else
+#    echo "run in new node"
+#    module load intel18u4
+#    mpirun -bootstrap lsf -PSM2 /export/soft/vasp544/vasp.5.4.4/bin/vasp_std
+#fi
+#mpirun -PSM2 vasp535.manylinux-intel-mpi-ofast-avx2-avx512
+mpirun vasp535-intel-mpi

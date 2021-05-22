@@ -4,6 +4,7 @@
 
 - 在sp目录中准备VASP输入文件: INCAR, KPOINTS, POTCAR (POSCAR在计算中根据
   input.tera模板, 自动生成)
+  
 * 注意事项
 - INCAR中应为单点计算
   : NSW    =    0

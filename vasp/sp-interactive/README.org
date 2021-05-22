@@ -1,0 +1,20 @@
+该模板为VASP交互计算模式:
+- submit.sh脚本将启动VASP进程, 并在计算期长驻内存.
+- interact.sh脚本每次调用时, 与VASP进程(通过unix domain socket)交互, 发送新结构,
+  收取计算结果(energy/forces)
+
+* 如何使用?
+- 复制本目录到任务所在目录, 比如:
+  : cp -r /share/apps/vasp/sp-interactive .
+
+- 修改sp-interactive目录下VASP输入文件: INCAR, KPOINTS, POTCAR (POSCAR在计算中根据
+  input.tera模板, 自动生成)
+
+- 计算示例: 使用bbm优化结构
+  : bbm -t sp-interactive -vvv 5.poscar --opt --fmax 0.05 --nmax 200
+  其中5.poscar为VASP POSCAR文件格式, 其中设定了固定原子(T/F flags).
+  
+* 注意事项
+- 该模式仅支持固定晶胞的结构优化或反应路径计算.
+- VASP要求为5.3以上版本.
+- gosh/bbm需为0.0.27以上版本.
